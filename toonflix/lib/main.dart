@@ -62,12 +62,31 @@ class App extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 30,
               ),
               Row(
-                children: [Container(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.amber.withOpacity(0.9),
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 50,
+                        vertical: 20,
+                      ),
+                      child: Text(
+                        'Transfer',
+                        style: TextStyle(
+                          fontSize: 22,
+                        ),
+                      ),
+                    ),
+                  ),
+
                   /// buttons Section : 6:30
-                )],
+                ],
               )
             ],
           ),
