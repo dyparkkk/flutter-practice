@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:toonflix/widgets/button.dart';
 
 void main() {
-  runApp(App());
+  runApp(const App());
 }
 
 class App extends StatelessWidget {
@@ -13,7 +14,7 @@ class App extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.black,
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -67,27 +68,18 @@ class App extends StatelessWidget {
                 height: 30,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.amber.withOpacity(0.9),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 50,
-                        vertical: 20,
-                      ),
-                      child: Text(
-                        'Transfer',
-                        style: TextStyle(
-                          fontSize: 22,
-                        ),
-                      ),
-                    ),
+                  Button(
+                    text: 'Transfer',
+                    color: Colors.amber.withOpacity(0.9),
+                    textColor: Colors.black,
                   ),
-
-                  /// buttons Section : 6:30
+                  Button(
+                    text: 'Request',
+                    color: Colors.blueGrey.shade800,
+                    textColor: Colors.white,
+                  ),
                 ],
               )
             ],
