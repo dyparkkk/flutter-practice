@@ -5,6 +5,8 @@ void main() {
 }
 
 class App extends StatelessWidget {
+  const App({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -15,7 +17,7 @@ class App extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 80,
               ),
               Row(
@@ -24,7 +26,7 @@ class App extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'Hey, Doyoung',
                         style: TextStyle(
                           color: Colors.white,
@@ -43,7 +45,7 @@ class App extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 120,
               ),
               Text(
@@ -61,7 +63,7 @@ class App extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Row(
@@ -71,8 +73,8 @@ class App extends StatelessWidget {
                       color: Colors.amber.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                    child: const Padding(
+                      padding: EdgeInsets.symmetric(
                         horizontal: 50,
                         vertical: 20,
                       ),
