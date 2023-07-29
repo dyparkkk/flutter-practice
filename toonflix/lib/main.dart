@@ -19,7 +19,7 @@ class App extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
-                height: 80,
+                height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -47,7 +47,7 @@ class App extends StatelessWidget {
                 ],
               ),
               const SizedBox(
-                height: 120,
+                height: 100,
               ),
               Text(
                 'Total Balance',
@@ -81,7 +81,82 @@ class App extends StatelessWidget {
                     textColor: Colors.white,
                   ),
                 ],
-              )
+              ),
+              const SizedBox(
+                height: 100,
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text(
+                    'Wallets',
+                    style: TextStyle(
+                      fontSize: 38,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'View All',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white.withOpacity(0.8),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Container(
+                clipBehavior: Clip.hardEdge,
+                decoration: BoxDecoration(
+                  color: Colors.blueGrey.shade800,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        children: [
+                          const Text(
+                            'Euro',
+                            style: TextStyle(
+                              fontSize: 32,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            '€ 4,000',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white.withOpacity(0.8),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Transform.scale(
+                        scale: 2,
+                        child: Transform.translate(
+                          offset: const Offset(-5, 8),
+                          child: const Icon(
+                            Icons.euro_rounded,
+                            color: Colors.white,
+                            size: 98,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
