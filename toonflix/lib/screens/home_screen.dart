@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toonflix/service/api_service.dart';
 import 'package:toonflix/models/webtoon_model.dart';
+import 'package:toonflix/widgets/webtoon_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -33,6 +34,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: FutureBuilder(
+        // api 호출. state 변화
         future: webtoons,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
@@ -52,6 +54,8 @@ class HomeScreen extends StatelessWidget {
   }
 
   ListView ListData(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    // snapshot으로 부터 데이터를 가져와 보여줌
+    // 보여주는 것은 home_screen의 역할. 데이터 처리는 ...? 따로 위젯으로 빼도 될듯 ! ->
     return ListView.separated(
       scrollDirection: Axis.horizontal,
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -60,37 +64,10 @@ class HomeScreen extends StatelessWidget {
         // columnd에 image 추가
         // container로 크기 설정.
         //   decoration + clipBehavior (자식이 부모 침범 방지)
-        //
-        return Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            Container(
-              // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)),
-              clipBehavior: Clip.hardEdge,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      blurRadius: 10,
-                      offset: const Offset(3, 3),
-                    )
-                  ]),
-              height: 300,
-              child: Image.network(
-                webtoonModel.thumb,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(webtoonModel.title,
-                style: const TextStyle(
-                  fontSize: 15,
-                )),
-          ],
+        return WebtoonList(
+          title: webtoonModel.title,
+          thumb: webtoonModel.thumb,
+          id: webtoonModel.id,
         );
       },
       itemCount: snapshot.data!.length,
