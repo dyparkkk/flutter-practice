@@ -38,24 +38,67 @@ class HomeScreen extends StatelessWidget {
           if (snapshot.hasData) {
             // ListView() / ListView.builder() 최적화
             // itemBuilder : context, index **
-            return ListView.separated(
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                var webtoonModel = snapshot.data![index];
-                return Text(webtoonModel.title);
-              },
-              itemCount: snapshot.data!.length,
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  width: 20,
-                );
-              },
-            );
+            // 메서드 분리.
+            // column 추가. listview에 높이 제한 추가 -> expanded()
+            return ListData(snapshot);
           }
           // 동그란 로딩중
-          return const CircularProgressIndicator();
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
+    );
+  }
+
+  ListView ListData(AsyncSnapshot<List<WebtoonModel>> snapshot) {
+    return ListView.separated(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      itemBuilder: (context, index) {
+        var webtoonModel = snapshot.data![index];
+        // columnd에 image 추가
+        // container로 크기 설정.
+        //   decoration + clipBehavior (자식이 부모 침범 방지)
+        //
+        return Column(
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            Container(
+              // padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10)),
+              clipBehavior: Clip.hardEdge,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.5),
+                      blurRadius: 10,
+                      offset: const Offset(3, 3),
+                    )
+                  ]),
+              height: 300,
+              child: Image.network(
+                webtoonModel.thumb,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(webtoonModel.title,
+                style: const TextStyle(
+                  fontSize: 15,
+                )),
+          ],
+        );
+      },
+      itemCount: snapshot.data!.length,
+      separatorBuilder: (context, index) {
+        return const SizedBox(
+          width: 20,
+        );
+      },
     );
   }
 }
