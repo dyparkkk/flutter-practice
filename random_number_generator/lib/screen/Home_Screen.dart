@@ -12,7 +12,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int maxNumber = 1000;
   List<int> randomNumbers = [123, 456, 789];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,11 +27,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const _Header(),
+              _Header(
+                onPressed: onSettingsPop,
+              ),
               _Body(
                 randomNumbers: randomNumbers,
               ),
-              _Footer(onPressed: onPressedGenerateRandomNumbers),
+              _Footer(
+                onPressed: onPressedGenerateRandomNumbers,
+              ),
             ],
           ),
         ),
@@ -41,16 +47,38 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {
       Set<int> numbers = {};
       while (numbers.length < 3) {
-        int randomNumber = Random().nextInt(1000);
+        int randomNumber = Random().nextInt(maxNumber);
         numbers.add(randomNumber);
       }
       randomNumbers = numbers.toList();
     });
   }
+
+  void onSettingsPop() async {
+    final int? result = await Navigator.of(context).push<int>(
+      MaterialPageRoute(
+        builder: (context) {
+          return SettingScreen(
+            maxNumber: maxNumber,
+          );
+        },
+      ),
+    );
+
+    if (result != null) {
+      setState(() {
+        maxNumber = result;
+      });
+    }
+  }
 }
 
 class _Header extends StatelessWidget {
-  const _Header();
+  final VoidCallback onPressed;
+
+  const _Header({
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -66,15 +94,7 @@ class _Header extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) {
-                  return const SettingScreen();
-                },
-              ),
-            );
-          },
+          onPressed: onPressed,
           icon: const Icon(
             Icons.settings,
             color: redColor,
